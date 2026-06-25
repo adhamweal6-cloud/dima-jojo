@@ -687,3 +687,26 @@ time.onchange = function(){
     localStorage.setItem('time',time.value )
 }
 
+
+
+let name = document.getElementById('client-name')
+
+if(localStorage.length > 0){
+    name.value = localStorage.getItem('name')
+}
+
+name.onkeyup = function(){
+    localStorage.setItem('name',name.value)
+}
+
+
+let num = document.getElementById('client-phone')
+
+if(localStorage.length > 0){
+    num.value = localStorage.getItem('num')
+}
+
+num.onkeyup = function(){
+    localStorage.setItem('num',num.value)
+}
+
