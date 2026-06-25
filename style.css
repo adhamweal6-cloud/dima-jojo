@@ -1,0 +1,1206 @@
+/* 1. إعدادات التصميم الأساسي (Apple Aesthetic) */
+html {
+    scroll-behavior: smooth;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'SF Pro Display', 'Poppins', sans-serif;
+}
+
+body {
+    min-height: 100vh;
+    /* خلفية متدرجة فخمة وناعمة جداً تليق بالفساتين وتظهر الـ Glass */
+    background: linear-gradient(135deg, #0f1219 0%, #1e111d 50%, #0b0d14 100%);
+    background-attachment: fixed;
+    color: #ffffff;
+    overflow-x: hidden;
+    padding-top: 100px; /* مسافة عشان الناف بار الثابت */
+}
+
+
+/* 🖱️ تصميم الماوس السحري */
+
+/* بنخفي الماوس العادي في الشاشات الكبيرة عشان يظهر الماوس بتاعنا */
+@media (min-width: 769px) {
+    body, a, button, .dress-card, .slide-arrow {
+        cursor: none !important; 
+    }
+}
+
+/* الدائرة الصغيرة الصريحة اللي في النص */
+.cursor-dot {
+    width: 8px;
+    height: 8px;
+    background-color: var(--accent);
+    position: fixed;
+    top: 0; left: 0;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    z-index: 10000;
+    pointer-events: none; /* عشان الماوس ميغطيش على الضغطات */
+    transition: width 0.2s, height 0.2s;
+}
+
+/* الدائرة الخارجية الزجاجية الكبيرة اللي بتتحرك بنعومة */
+.cursor-outline {
+    width: 30px;
+    height: 30px;
+    border: 2px solid var(--accent);
+    position: fixed;
+    top: 0; left: 0;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    z-index: 9999;
+    pointer-events: none;
+    /* تأثير الحركة الناعمة جداً اللي بتلحق الماوس */
+    transition: transform 0.1s ease-out, width 0.3s, height 0.3s, background-color 0.3s; 
+}
+
+/* 🔥 الحركة الصايعة: التأثير لما الماوس يقف على زرار أو لينك (Hover State) */
+.cursor-grow {
+    width: 50px;
+    height: 50px;
+    background-color: rgba(255, 77, 136, 0.1); /* بتبلع لون بينك شفاف */
+    border-color: var(--accent);
+}
+
+/* 💕 تأثير القلوب الطائرة في الخلفية */
+#hearts-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    pointer-events: none; /* عشان العميل يعرف يدوس على أي حاجة ورا القلوب */
+    z-index: 1; /* ورا الكروت والناف بار، بس فوق الخلفية */
+}
+
+.floating-heart {
+    position: absolute;
+    bottom: -20px; /* بتبدأ من تحت الشاشة */
+    color: var(--accent); /* بتاخد اللون البينك */
+    font-size: 14px;
+    opacity: 0.15; /* شفافة جداً وهادية عشان متضايقش العين وتداري على الكلام */
+    filter: drop-shadow(0 0 5px rgba(255, 77, 136, 0.3));
+    animation: floatUp 6s linear infinite;
+    pointer-events: none;
+}
+
+/* 🚀 أنيميشن صعود القلوب واختفائها */
+@keyframes floatUp {
+    0% {
+        transform: translateY(0) translateX(0) rotate(0deg);
+        opacity: 0;
+    }
+    10% {
+        opacity: 0.25; /* بتوضح سيكة وهي طالعة */
+    }
+    90% {
+        opacity: 0.15;
+    }
+    100% {
+        /* بتطلع فوق الشاشة وتتحرك يمين وشمال عشوائي وتختفي تماماً */
+        transform: translateY(-105vh) translateX(50px) rotate(45deg);
+        opacity: 0;
+    }
+}
+
+/* ⏳ شاشة الـ Preloader الخلفية كاملة */
+#preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: #0f1219; /* نفس لون خلفية الموقع المظلمة عشان ميبقاش فاقع */
+    z-index: 9999; /* رقم ضخم عشان يغطي على الناف بار وزرار الواتساب وكل حاجة */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 0.5s ease, visibility 0.5s ease; /* تأثير إخفاء ناعم */
+}
+
+/* 🌀 كود اللودر المتطور اللي أنت اخترته */
+.loader-container {
+    position: relative; /* غيرتها لـ relative عشان تتوسط صح جوه الـ flex body */
+    border-radius: 50%;
+    height: 96px;
+    width: 96px;
+    animation: rotate_3922 1.2s linear infinite;
+    background-color: #ff4d88;
+    /* عدلت الألوان لدرجات البينك والموف الفاخرة بتاعة موقعك */
+    background-image: linear-gradient(#ff4d88, #d6249f, #2e1065); 
+}
+
+.loader-container span {
+    position: absolute;
+    border-radius: 50%;
+    height: 100%;
+    width: 100%;
+    background-color: #ff4d88;
+    background-image: linear-gradient(#ff4d88, #d6249f, #2e1065);
+}
+
+.loader-container span:nth-of-type(1) { filter: blur(5px); }
+.loader-container span:nth-of-type(2) { filter: blur(10px); }
+.loader-container span:nth-of-type(3) { filter: blur(25px); }
+.loader-container span:nth-of-type(4) { filter: blur(50px); }
+
+/* الدائرة الداخلية البيضاء الشفافة */
+.loader-container::after {
+    content: "";
+    position: absolute;
+    top: 6px;
+    left: 6px;
+    right: 6px;
+    bottom: 6px;
+    background-color: #0f1219; /* خليتها نفس لون الخلفية المظلمة عشان تطلع مفرغة وشيك */
+    border-radius: 50%;
+}
+
+/* حركة الدوران */
+@keyframes rotate_3922 {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* 🚫 كلاس الإخفاء اللي هنضيفه بالجافا سكريبت */
+#preloader.fade-out {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none; /* عشان العميل يعرف يدوس على اللينكات بعد ما يختفي */
+}
+
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* 2. الناف بار السوبر زجاجي (Header) */
+.glass-header {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 1100px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 40px;
+    border-radius: 30px;
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+}
+
+.logo {
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: #ffffff;
+    flex-wrap: wrap;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+}
+
+.nav {
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+    gap: 25px;
+}
+
+.nav a {
+    text-decoration: none;
+    flex-wrap: wrap;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 15px;
+    font-weight: 500;
+    transition: 0.3s ease;
+}
+
+.nav a:hover {
+    color: #ff4d88;
+    text-shadow: 0 0 10px rgba(255, 77, 136, 0.6);
+}
+
+/* 3. العناوين والفواصل */
+.section-padding {
+    padding: 60px 0;
+}
+
+.section-title {
+    text-align: center;
+    font-size: 2.2rem;
+    font-weight: 600;
+    letter-spacing: 3px;
+    margin-bottom: 40px;
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+}
+
+.apple-hr {
+    border: none;
+    height: 1px;
+    background: linear-gradient(to right, transparent, rgba(255, 77, 136, 0.4), transparent);
+    margin: 20px 0;
+}
+
+/* 4. كروت الفساتين الفاجرة (Grid System) */
+.dress-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 35px;
+    width: 100%;
+}
+
+.dress-card {
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 24px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(5px);
+    overflow: hidden;
+    transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+}
+
+.dress-card:hover {
+    transform: translateY(-10px) scale(1.02);
+    border-color: rgba(255, 77, 136, 0.3);
+    box-shadow: 0 20px 50px rgba(255, 77, 136, 0.15);
+}
+/* إعدادات السلايدر الخارجي */
+.slider-wrapper {
+    position: relative;
+    width: 100%;
+    margin: 0 auto;
+    overflow: hidden; /* عشان الكروت الزيادة متعملش سكرول في الصفحة */
+    padding: 20px 0;
+}
+
+/* الحاوية الطويلة اللي بتتحرك يمين وشمال */
+.dress-slider {
+    display: flex;
+    gap: 30px;
+    transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1); /* حركة ناعمة جداً شبه أبل */
+    width: 100%;
+}
+
+/* تظبيط حجم الكروت جوه السلايدر عشان تاخد مساحتها صح */
+.dress-slider .dress-card {
+    flex: 0 0 calc(33.333% - 20px); /* بيعرض 3 كروت في الشاشات الكبيرة */
+    max-width: calc(33.333% - 20px);
+}
+
+/* أزرار الأسهم الزجاجية */
+.slide-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: white;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 10;
+    transition: 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+
+.slide-arrow:hover {
+    background: #ff4d88;
+    border-color: #ff4d88;
+    box-shadow: 0 0 15px rgba(255, 77, 136, 0.5);
+}
+
+.prev-arrow { left: 10px; }
+.next-arrow { right: 10px; }
+
+/* للتوافق مع الموبايل: نعرض كارت واحد بس كامل */
+@media (max-width: 900px) {
+    .dress-slider .dress-card {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+    .slide-arrow { width: 40px; height: 40px; }
+}
+
+.img-container {
+    width: 100%;
+    height: 380px; /* طول متناسق وموحد لكل الصور */
+    overflow: hidden;
+}
+
+.img-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* بيخلي الصور متتقصش ولا تبيّن فراغات */
+    transition: transform 0.7s ease;
+}
+
+.dress-card:hover .img-container img {
+    transform: scale(1.08); /* تأثير زووم خفيف محترف عند الـ Hover */
+}
+
+.card-info {
+    padding: 25px;
+    text-align: center;
+    background: rgba(15, 18, 25, 0.8);
+}
+
+.card-info h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+    font-weight: 600;
+    color: #f5f5f7;
+}
+
+.price {
+    font-size: 16px;
+    font-weight: 300;
+    color: #ff99cc;
+    margin-bottom: 20px;
+    letter-spacing: 1px;
+}
+
+/* 5. أزرار الشراء الفخمة (Apple-like buttons) */
+.buy-btn {
+    display: inline-block;
+    text-decoration: none;
+    color: #ffffff;
+    background: linear-gradient(135deg, #ff4d88 0%, #d6249f 100%);
+    padding: 12px 35px;
+    border-radius: 40px;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(255, 77, 136, 0.4);
+}
+
+.buy-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 25px rgba(255, 77, 136, 0.7);
+    color: #ffffff;
+}
+
+.buy-btn:active {
+    transform: scale(0.98);
+}
+
+/* 6. قسم العروض والموقع زجاجي */
+.glass-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 40px;
+    text-align: center;
+    width: 100%;
+}
+
+
+/* 💎 تحويل كروت العدادات لستايل الكريستال الزجاجي الفاخر */
+.stat-card {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+   margin: 10px;
+    /* 🌟 سر الزجاج: خلفية شفافة جداً مع تأثير بلور (Blur) قوي للخلفية */
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    
+    /* 🤍 حواف مضيئة وناعمة شبه الكريستال */
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 30px;
+    padding: 35px 20px;
+    text-align: center;
+    width: 100%;
+    /* 👥 ظل ضخم عشان يخلي الكرت بارز وعايم فوق الخلفية المتدرجة */
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+    transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* ☀️ تظبيط شكل الزجاج المضيء في الـ Light Mode تلقائياً عشان الأرقام تظهر بوضوح */
+.light-mode .stat-card {
+    background: rgba(255, 255, 255, 0.45);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    box-shadow: 0 20px 40px rgba(31, 38, 135, 0.06);
+}
+
+/* 🔥 حركة صايعة: لما الماوس ييجي على كرت العداد، يرتفع لفوق ويلمع بلون بينك خفيف */
+.stat-card:hover {
+    transform: translateY(-10px);
+    background: rgba(255, 255, 255, 0.07);
+    border-color: var(--accent);
+    box-shadow: 0 25px 55px rgba(255, 77, 136, 0.15); /* ظل مضيء حول الكرت */
+}
+
+/* تأثير الـ Hover في الـ Light Mode */
+.light-mode .stat-card:hover {
+    background: rgba(255, 255, 255, 0.7);
+    box-shadow: 0 25px 55px rgba(0, 0, 0, 0.08);
+}
+
+
+.offers-p {
+    font-size: 1.2rem;
+    color: rgba(255, 255, 255, 0.8);
+    letter-spacing: 1px;
+}
+
+.map-container {
+    width: 100%;
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.map-container iframe {
+    width: 100%;
+    height: 400px;
+    display: block;
+}
+.social-1nfo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    margin-top: 20px;
+    width: 100%;
+}
+.l-1{
+    border-radius: 50%;
+    transition: 0.3s ;
+}
+.l-1:hover {
+    transform: scale(1.2);
+    filter: drop-shadow(0 0px 10px rgba(0, 128, 0, 0.852));
+}
+.l-2{
+    transition: 0.3s ;
+}
+.l-2:hover {
+    transform: scale(1.2);
+    filter: drop-shadow(0 0px 10px rgba(255, 77, 136, 0.852));
+}
+.l-3{
+    transition: 0.3s ;
+}
+.l-3:hover {
+    transform: scale(1.2);
+    filter: drop-shadow(0 0px 10px rgb(35, 35, 255));
+}
+
+
+.social-links {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    text-decoration: none;
+    color: #fff;
+    padding: 0px;
+    text-align: center;
+    border-radius: 16px;
+    margin: 0 0px;
+    font-size: 18px;
+    width: 100px;
+    font-weight: 600;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* 💬 تنسيق قسم آراء الزباين */
+.reviews-wrapper {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    padding: 30px 0;
+    margin-bottom: 40px;
+}
+
+.reviews-slider {
+    display: flex;
+    gap: 25px;
+    transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+    width: 100%;
+}
+
+/* كروت زجاجية شفافة فخمة */
+.review-card {
+    flex: 0 0 calc(33.333% - 17px); /* يعرض 3 كروت جمب بعض في الشاشات الكبيرة */
+    background: var(--header-glass); /* بيقرأ المتغير الزجاجي عشان يقلب مع الـ Mode تلقائي */
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 30px;
+    text-align: center;
+    box-shadow: 0 10px 25px var(--shadow);
+    transition: 0.3s ease;
+}
+
+/* تأثير تحريك خفيف لما الماوس ييجي على رأي الزبون */
+.review-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--accent);
+}
+
+.stars {
+    color: #ffb800; /* لون ذهبي رايق للنجوم */
+    font-size: 14px;
+    margin-bottom: 15px;
+}
+
+.review-text {
+    font-style: italic;
+    color: var(--text-muted);
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    min-height: 70px; /* عشان نوحد أطوال الكروت */
+}
+
+.client-name {
+    color: var(--accent);
+    font-weight: 600;
+    font-size: 15px;
+}
+
+
+.fb:hover { background: #1877f2; box-shadow: 0 10px 25px rgba(24, 119, 242, 0.4); }
+.wa:hover { background: #25d366; box-shadow: 0 10px 25px rgba(37, 211, 102, 0.4); }
+.insta:hover { 
+    background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fd5949 45%, #d6249f 60%, #285AEB 90%); 
+    box-shadow: 0 10px 25px rgba(214, 36, 159, 0.4); 
+}
+
+/* 8. زرار الواتس العايم الذكي */
+.floating-whats {
+    position: fixed;
+    bottom: 150px;
+    right: 30px; /* تظبيط مكانه يمين عشان الـ UI يكون مظبوط وميغطيش الداتا */
+    width: 60px;
+    height: 60px;
+    z-index: 999;
+    transition: 0.3s;
+    filter: drop-shadow(0 8px 16px rgba(255, 255, 255, 0.3));
+}
+
+.floating-whats img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.floating-whats:hover {
+    transform: scale(1.1) rotate(5deg);
+}
+/* ❤️ تنسيق أزرار وقائمة المفضلة (Favorite System) */
+
+.header-controls {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* زرار المفضلة اللي في الناف بار */
+.fav-nav-btn {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    color: var(--text-main);
+    padding: 8px 15px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 14px;
+    transition: 0.3s;
+}
+.fav-nav-btn span {
+    background: var(--accent);
+    color: white;
+    padding: 2px 7px;
+    border-radius: 50%;
+    font-size: 11px;
+    margin-left: 5px;
+}
+
+/* صندوق المفضلات الزجاجي المنسدل */
+.fav-dropdown-box {
+    position: absolute;
+    top: 80px; right: 5%;
+    width: 300px;
+    background: var(--header-glass);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 0 20px 40px var(--shadow);
+    display: none; /* مخفي وهنظهره بالجافا سكريبت */
+    z-index: 2000;
+}
+.fav-dropdown-box.active { display: block; animation: fadeIn 0.3s ease; }
+.fav-dropdown-box h4 { margin-bottom: 15px; font-size: 16px; color: var(--accent); border-bottom: 1px solid var(--border); padding-bottom: 5px;}
+#fav-items-list { list-style: none; max-height: 200px; overflow-y: auto; }
+#fav-items-list li { display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 13px; }
+.remove-fav-btn { background: none; border: none; color: #ff3333; cursor: pointer; font-size: 12px; }
+
+/* زرار القلب الطاير فوق صورة الفستان */
+.img-container { position: relative; }
+.heart-btn {
+    position: absolute;
+    top: 15px; right: 15px;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    font-size: 18px;
+    width: 38px; height: 38px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer;
+    z-index: 5;
+    transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.heart-btn:hover { transform: scale(1.15); }
+.heart-btn.liked { background: var(--accent); border-color: var(--accent); color: white; }
+
+
+
+/* 🛒 سلة المشتريات الزجاجية المتكاملة */
+
+/* الزرار العايم في الشاشة */
+#floating-cart-btn {
+    position: fixed;
+    bottom: 30px;
+    left: 30px;
+    background: var(--accent);
+    color: white;
+    border: none;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    font-size: 24px;
+    cursor: pointer;
+    box-shadow: 0 10px 25px rgba(255, 77, 136, 0.4);
+    z-index: 2999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.3s ease;
+}
+#floating-cart-btn:hover { transform: scale(1.1); }
+#floating-cart-count {
+    position: absolute;
+    top: -5px; right: -5px;
+    background: pink;
+    color: var(--accent);
+    font-size: 12px;
+    font-weight: bold;
+    padding: 3px 8px;
+    border-radius: 50%;
+}
+
+/* السلة الجانبية */
+.cart-sidebar-box {
+    position: fixed;
+    top: 0; right: -400px; /* مخفية برا الشاشة على اليمين */
+    width: 380px;
+    height: 100vh;
+    background: var(--header-glass);
+    backdrop-filter: blur(25px) saturate(180%);
+    -webkit-backdrop-filter: blur(25px) saturate(180%);
+    border-left: 1px solid var(--border);
+    box-shadow: -10px 0 30px var(--shadow);
+    z-index: 3000;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    transition: right 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+.cart-sidebar-box.open {
+    right: 0; /* بتدخل الشاشة */
+}
+
+.cart-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; border-bottom: 1px solid var(--border); padding-bottom: 10px; }
+.cart-header h3 { color: var(--accent); }
+#close-cart-btn { background: none; border: none; cursor: pointer; font-size: 16px; }
+
+#cart-items-list { list-style: none; flex: 1; overflow-y: auto; margin-bottom: 20px; }
+#cart-items-list li { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid rgba(250, 250, 250, 0.05); font-size: 14px; }
+
+.cart-total { display: flex; justify-content: space-between; font-weight: bold; font-size: 18px; margin-bottom: 20px; color: var(--text-main); }
+
+/* فورم البيانات */
+.cart-form h4 { color: var(--accent); margin-bottom: 10px; }
+.cart-form input {
+    width: 100%;
+    padding: 12px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    color: var(--text-main);
+    margin-bottom: 12px;
+    font-size: 14px;
+}
+.light-mode .cart-form input { background: rgb(255, 255, 255); }
+
+#checkout-btn, .add-to-cart-btn {
+    width: 100%;
+    background: var(--accent);
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 12px;
+    font-weight: bold;
+    cursor: pointer;
+    margin: 20px 0;
+    transition: 0.3s;
+}
+#checkout-btn:hover, .add-to-cart-btn:hover { opacity: 0.9; transform: translateY(-2px); }
+
+@keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+
+
+/* ستايل صندوق تكبير الصور */
+.image-modal {
+    display: none; /* مخفي في البداية */
+    position: fixed; 
+    z-index: 100000; 
+    padding-top: 60px;
+    left: 0; top: 0; 
+    width: 100%; height: 100%; 
+    background-color: rgba(15, 18, 25, 0.95); /* خلفية غامقة مريحة للعين */
+    backdrop-filter: blur(10px);
+}
+
+.modal-content {
+    margin: auto; 
+    display: block; 
+    width: 90%; 
+    max-width: 600px; /* عشان متفرشطش أوي على الشاشات الكبيرة */
+    border-radius: 16px; 
+    box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+    animation: zoomIn 0.3s ease;
+}
+
+.close-modal {
+    position: absolute; 
+    top: 20px; 
+    right: 35px; 
+    color: #ffffff;
+    font-size: 40px; 
+    font-weight: bold; 
+    cursor: pointer; 
+    transition: 0.3s;
+}
+
+.close-modal:hover { color: var(--accent); }
+
+@keyframes zoomIn { 
+    from { transform: scale(0.8); opacity: 0; } 
+    to { transform: scale(1); opacity: 1; } 
+}
+/* تصميم زرار العودة الفاخر - النسخة المضادة للتعليق */
+.back-to-top {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    
+    /* تأثير الزجاج الشفاف */
+    background: rgba(255, 182, 193, 0.4); 
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    
+    color: #ff69b4; 
+    border: 1px solid rgba(255, 182, 193, 0.6);
+    border-radius: 50%;
+    width: 48px;
+    height: 48px;
+    cursor: pointer;
+    z-index: 9999;
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    /* 🛠️ التعديل السحري هنا: الزرار هينزل تحت الشاشة تماماً وهيبطل يحس بالماوس */
+    opacity: 0;
+    pointer-events: none; 
+    transform: translateY(100px); /* نزلناه 100 بيكسل تحت الشاشة عشان يختفي تماماً */
+    
+    /* نعومة فائقة في الحركة */
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 8px 24px rgba(255, 182, 193, 0.2);
+}
+
+/* السهم نفسه */
+.back-to-top .arrow-icon {
+    font-size: 24px;
+    font-weight: bold;
+    transition: transform 0.3s ease;
+}
+
+/* كلاس الظهور: أول ما تنزل سكرول يرجع مكانه الطبيعي ويشتغل */
+.back-to-top.show {
+    opacity: 1;
+    pointer-events: auto; /* يرجع قابل للضغط */
+    transform: translateY(0); /* يطلع لمكانه الطبيعي */
+}
+
+/* تأثير الـ Hover */
+.back-to-top:hover {
+    background: rgba(255, 105, 180, 0.8); 
+    color: #fff; 
+    box-shadow: 0 8px 32px rgba(255, 105, 180, 0.4);
+    transform: translateY(-3px); /* حركة طلوع خفيفة للشياكة بدل تغيير الحجم */
+}
+
+.back-to-top:hover .arrow-icon {
+    transform: translateY(-2px);
+}
+
+/* ==========================================
+   تعريف الحركة (التحريك والدوران)
+   ========================================== */
+@keyframes drift {
+    from {
+        transform: rotate(0deg);
+    }
+    from {
+        transform: rotate(360deg);
+    }
+}
+
+/* تأكد أن محتوى الموقع الحقيقي واخد z-index أعلى عشان يبان فوق الأمواج */
+/* مثال: */
+/* .main-content, header, footer {
+    position: relative;
+    z-index: 1;
+}
+*/
+
+/* ==========================================================================
+   🎯 الـ Responsive الخارق وجول جافا سكريبت لكل الشاشات (Mobile & Tablets)
+   ========================================================================== */
+
+/* تنسيق صندوق الفورمة بالكامل */
+#booking-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    background-color: #0d0d12;
+    padding: 30px;
+    border-radius: 15px;
+    border: 1px solid #22222f;
+    max-width: 500px;
+    margin: 40px auto;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+/* تنسيق كل خانة (الليبل + حقل الإدخال) */
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+/* تنسيق العناوين فوق الخانات */
+.form-group label {
+    color: #ff758c;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+/* تنسيق حقول الإدخال والاختيار */
+.form-group input, 
+.form-group select {
+    padding: 14px;
+    border-radius: 8px;
+    border: 1px solid #1a1a24;
+    background: #14141a;
+    color: white;
+    font-size: 15px;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+/* لون الحدود لما تضغط على الخانة عشان تكتب */
+.form-group input:focus, 
+.form-group select:focus {
+    border-color: #00f2fe;
+}
+
+/* تنسيق زرار تأكيد الحجز */
+#submit-booking-btn {
+    background: linear-gradient(90deg, #ff758c, #ff4b6b);
+    color: white;
+    border: none;
+    padding: 15px;
+    border-radius: 8px;
+    font-size: 17px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: opacity 0.3s ease;
+}
+
+/* تأثير لما تقف بالماوس على الزرار */
+#submit-booking-btn:hover {
+    opacity: 0.85;
+}
+
+/* تأثير لما الزرار يتعطل وقت التحميل */
+#submit-booking-btn:disabled {
+    background: #5c5c6d;
+    cursor: not-allowed;
+}
+
+/* ==========================================
+   ستايل شريط الحقوق واسم المطور (High Contrast)
+   ========================================== */
+.simple-footer-bottom {
+    background-color: #1a1a1a; /* أرضية غامقة فخمة عشان تكسر اللون الباهت */
+    color: #999;
+    padding: 20px;
+    margin-top: 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    font-size: 14px;
+    direction: rtl; /* تنسيق عربي */
+    border-top: 2px solid #ffb6c1; /* خط بينك شيك من فوق يربطه مع الأمواج */
+}
+
+/* ستايل اسمك البطل */
+.developer-credit {
+    font-size: 15px;
+    color: #eee;
+}
+
+.developer-credit span {
+    color: #ff69b4; /* اسمك بالبينك الواضح */
+    font-weight: bold;
+    text-shadow: 0 0 10px rgba(255, 105, 180, 0.3);
+    letter-spacing: 0.5px;
+}
+
+/* متوافق مع الموبايل عشان ييجوا تحت بعض لو الشاشة صغيرة */
+@media (max-width: 768px) {
+    .simple-footer-bottom {
+        flex-direction: column;
+        text-align: center;
+        gap: 10px;
+    }
+
+}
+
+/* متوافق مع الموبايل */
+@media (max-width: 768px) {
+
+    .booking-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 90%;
+    }
+
+.booking-form .input-row {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 15px;
+    width: 200px;
+}
+}
+.input-group input, .input-group select {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 200px;
+}
+
+
+   
+/* 1️⃣ تظبيط شاشات التابلت والشاشات المتوسطة (Less than 1024px) */
+@media (max-width: 1024px) {
+    .dress-slider .dress-card, .review-card {
+        flex: 0 0 calc(50% - 13px); /* يعرض كارتين جمب بعض بدل 3 */
+        max-width: calc(50% - 13px);
+    }
+}
+
+/* 2️⃣ تظبيط شاشات الموبايل (المشكلة الحقيقية) */
+@media (max-width: 768px) {
+    body { 
+        margin: 0;
+        padding-top: 150px; /* تزويد المسافة عشان الـ Header المنبثق مياكلش المحتوى */
+    }
+
+    /* تفكيك الـ Header وإعادة ترتيبه عشان ميبقاش طويل */
+    .glass-header { 
+        width: 94%;
+        padding: 12px 18px; 
+        border-radius: 20px; 
+        top: 12px;
+        display: grid;
+        grid-template-columns: auto auto; /* يقسم الـ Header نصين */
+        gap: 10px;
+    }
+
+    .logo { 
+        font-size: 17px; 
+        grid-column: 1; /* اللوجو فوق شمال */
+    }
+
+    .header-controls { 
+        grid-column: 2; 
+        justify-self: end; /* زرار المفضلة فوق يمين */
+    }
+
+    .booking-nav-btn { 
+        grid-column: 1 / span 2; /* زرار الحجز ياخد العرض كله تحت اللوجو */
+        width: 100%; 
+        text-align: center; 
+        font-size: 12px; 
+        padding: 10px; 
+        border-radius: 12px;
+    }
+    /* عرض كارت واحد كامل في الشاشة عشان العميل يشوف تفاصيل الفستان بوضوح */
+    .dress-slider .dress-card, .review-card { 
+        flex: 0 0 100%; 
+        max-width: 100%; 
+    }
+
+    .img-container { 
+        height: 320px; /* تظبيط طول الصور للموبايل */
+    }
+
+    /* السلة الجانبية تاخد الشاشة كلها في الموبايل عشان الفورم والكيبورد */
+    .cart-sidebar-box { 
+        width: 100%; 
+        right: -100%; 
+        padding: 20px;
+    }
+    
+#checkout-btn, .add-to-cart-btn {
+    width: 100%;
+    background: var(--accent);
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 12px;
+    font-weight: bold;
+    cursor: pointer;
+    margin: 30px 0;
+    transition: 0.3s;
+}
+
+    .fav-dropdown-box { 
+        width: 100%; 
+        right: 0; 
+        left: 0; 
+        top: 120px; 
+        border-radius: 16px;
+    }
+
+    .section-title { 
+        font-size: 1.6rem; 
+        letter-spacing: 1px;
+    }
+
+    /* الـ العدادات تنزل تحت بعض بدل ما تضغط جوه الشاشة */
+    .stats-grid { 
+        flex-direction: column; 
+        gap: 15px;
+    }
+
+    .stat-card { 
+        width: 100%; 
+        padding: 20px; 
+    }
+
+    .map-container iframe {
+        height: 260px; /* تصغير حجم الخريطة لتناسب المسافات */
+    }
+    
+    /* تصغير حجم أزرار الأسهم عشان متغطيش على صور الفساتين */
+    .slide-arrow {
+        width: 40px;
+        height: 40px;
+        font-size: 14px;
+    }
+
+    /* إخفاء الـ Custom Cursor على الموبايل عشان ملوش لازمة مع اللمس */
+    .cursor-dot, .cursor-outline { 
+        display: none !important; 
+    }
+/* حل سحري: تلوين أي زرار أو عنصر تفاعلي مباشرة على الموبايل */
+    button, 
+    input[type="button"], 
+    input[type="submit"],
+    [class*="btn"], 
+    [id*="btn"] {
+        background-color: #ff4d88 !important; /* اللون البينك الأساسي */
+        color: #ffffff !important; /* لون الكتابة أبيض */
+        opacity: 1 !important;
+        visibility: visible !important;
+    }
+
+    /* استثناء لزرار المفضلة والسهم عشان يفضلوا بشكلهم الرايق */
+    .fav-nav-btn, [class*="fav"] {
+        background-color: rgba(255, 255, 255, 0.02) !important;
+        border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    }
+}
+
+@media (max-width: 1200px) {
+      /* إخفاء الـ Custom Cursor على الموبايل عشان ملوش لازمة مع اللمس */
+    .cursor-dot, .cursor-outline { 
+        display: none !important; 
+    }
+/* حل سحري: تلوين أي زرار أو عنصر تفاعلي مباشرة على الموبايل */
+    button, 
+    input[type="button"], 
+    input[type="submit"],
+    [class*="btn"], 
+    [id*="btn"] {
+        background-color: #ff4d88 !important; /* اللون البينك الأساسي */
+        color: #ffffff !important; /* لون الكتابة أبيض */
+        opacity: 1 !important;
+        visibility: visible !important;
+    }
+
+    /* استثناء لزرار المفضلة والسهم عشان يفضلوا بشكلهم الرايق */
+    .fav-nav-btn, [class*="fav"] {
+        background-color: rgba(255, 255, 255, 0.02) !important;
+        border: 1px solid rgba(255, 255, 255, 0.08) !important;
+    }
+}
+
+
+

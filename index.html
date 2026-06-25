@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <meta name="description" content="أتيليه Dima & Jojo بمدينة نصر، شارع الطيران بجوار منتاكي. أرقى فساتين الزفاف والخطوبة. احصلي على إطلالة أحلامك معنا!">
+    <meta name="keywords" content="أتيليه فساتين, Dima & Jojo, فساتين زفاف مدينة نصر, أتيليه شارع الطيران, فساتين خطوبة">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DIMA & JOJO | Premium Atelier</title>
+    
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "name": "Dima & Jojo",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "شارع الطيران، بجوار منتاكي",
+        "addressLocality": "مدينة نصر",
+        "addressRegion": "القاهرة",
+        "addressCountry": "EG"
+      },
+      "telephone": "010xxxxxxxx", 
+      "url": "https://yourwebsite.com",
+      "openingHours": "Mo-Su 14:00-22:00"
+    }
+    </script>
+    
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>👗</text></svg>">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@300;400;600;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<div class="cursor-dot"></div>
+<div class="cursor-outline"></div>
+<div id="hearts-container"></div>
+
+<div id="preloader">
+    <div class="loader-container">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+</div>
+
+<header class="glass-header">
+    <div class="logo">DIMA & JOJO</div>
+    <ul class="nav">
+        <li><a href="#DRESSES">Dresses</a></li>
+        <li><a href="#BOOKING">Booking</a></li>
+        <li><a href="#REVIEWS">Reviews</a></li>
+        <li><a href="#LOCATION">Location</a></li>
+    </ul>
+    <div class="header-controls">
+        <button id="fav-menu-btn" class="fav-nav-btn">❤️ <span id="fav-count">0</span></button>
+    </div>
+    
+    <div id="fav-dropdown" class="fav-dropdown-box">
+        <h4>My Favorite Dresses</h4>
+        <ul id="fav-items-list"></ul>
+    </div>
+</header>
+
+<section id="STATS" class="section-padding">
+    <div class="stats-grid">
+        <div class="stat-card">
+            <h2 class="counter" data-target="500">0</h2>
+            <p>Happy Brides 👰</p>
+        </div>
+        <div class="stat-card">
+            <h2 class="counter" data-target="10">0</h2>
+            <p>Years Experience ✨</p>
+        </div>
+        <div class="stat-card">
+            <h2 class="counter" data-target="75">0</h2>
+            <p>Unique Designs 👗</p>
+        </div>
+    </div>
+</section>
+
+<section id="DRESSES" class="section-padding">
+    <h1 class="section-title">EXCLUSIVE DRESSES</h1>
+    
+    <div class="slider-wrapper">
+        <button class="slide-arrow prev-arrow">◀</button>
+        <button class="slide-arrow next-arrow">▶</button>
+
+        <div class="dress-slider">
+            <div class="dress-card" data-id="1" data-price="5000" data-title="Royal Wedding Dress">
+                <div class="img-container">
+                    <button class="heart-btn">🤍</button>
+                    <img src="images/csascascascsacscsacsac.jpeg" alt="فستان زفاف ملكي من أتيليه Dima & Jojo بمدينة نصر" title="فستان زفاف فخم">
+                </div>
+                <div class="card-info">
+                    <h3 class="dress-title">Royal Wedding Dress</h3>
+                    <p class="price">5,000 EGP</p>
+                    <button class="add-to-cart-btn">ADD TO CART 🛒</button>
+                </div>
+            </div>
+            
+            <div class="dress-card" data-id="2" data-price="11000" data-title="Elegant White Dress">
+                <div class="img-container">
+                    <button class="heart-btn">🤍</button>
+                    <img src="images/sacas.jpeg" alt="Elegant White Dress" title="فستان زفاف ملكي من أتيليه Dima & Jojo بمدينة نصر">
+                </div>
+                <div class="card-info">
+                    <h3 class="dress-title">Elegant White Dress</h3>
+                    <p class="price">11,000 EGP</p>
+                    <button class="add-to-cart-btn">ADD TO CART 🛒</button>
+                </div>
+            </div>
+
+            <div class="dress-card" data-id="3" data-price="16000" data-title="Modern Satin Dress">
+                <div class="img-container">
+                    <button class="heart-btn">🤍</button>
+                    <img src="images/saccscasc.jpeg" alt="Modern Satin Dress" title="فستان زفاف فخم">
+                </div>
+                <div class="card-info">
+                    <h3 class="dress-title">Modern Satin Dress</h3>
+                    <p class="price">16,000 EGP</p>
+                    <button class="add-to-cart-btn">ADD TO CART 🛒</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<h2 id="BOOKING" style="display: flex;
+align-items: center; justify-content: center;" >Book Your Appointment</h2>
+<form id="booking-form">
+    <div class="form-group">
+        <label for="bride-name">اسم العروسة 👑</label>
+        <input type="text" id="bride-name" placeholder="أدخلي اسمك بالكامل..." required>
+    </div>
+
+    <div class="form-group">
+        <label for="bride-phone">رقم الهاتف (واتساب) 📞</label>
+        <input type="text" id="bride-phone" placeholder="مثال: 012XXXXXXXX" required>
+    </div>
+
+    <div class="form-group">
+        <label for="booking-date">تاريخ الموعد 📅</label>
+        <input type="date" id="booking-date" required>
+    </div>
+    <div class="form-group">
+        <label for="booking-time">الفترة المفضلة ⏰</label>
+        <select id="booking-time" required>
+            <option value="" disabled selected>اختاري الفترة...</option>
+            <option value="صباحي (12 ظهراً - 4 عصراً)">صباحي (12 ظهراً - 4 عصراً) ☀️</option>
+            <option value="مسائي (4 عصراً - 9 مساءً)">مسائي (4 عصراً - 9 مساءً) 🌙</option>
+        </select>
+    </div>
+
+    <button type="submit" id="submit-booking-btn" class="main-btn">تأكيد الحج🚀</button>
+</form>
+
+<div id="cart-sidebar" class="cart-sidebar-box">
+    <div class="cart-header">
+        <h3>Shopping Cart 🛍️</h3>
+        <button id="close-cart-btn">❌</button>
+    </div>
+
+    <ul id="cart-items-list"></ul>
+
+    <div class="cart-total">
+        <span>Total:</span>
+        <span id="cart-total-price">0 EGP</span>
+    </div>
+
+    <div class="cart-form">
+        <h4>Client Details</h4>
+        <input type="text" id="client-name" placeholder="Your Name (اسمك)" required>
+        <input type="tel" id="client-phone" placeholder="Phone Number (رقمك)" required>
+       <button onclick="submitOrderToFirebase()" style="background-color: #ff4d6d; color: white; width: 100%; padding: 15px; border: none; border-radius: 10px; font-weight: bold; cursor: pointer; margin-top: 15px;">
+    تأكيد طلب الشراء 🛍️
+</button>
+    </div>
+</div>
+
+<button id="floating-cart-btn">🛒 <span id="floating-cart-count">0</span></button>
+
+<hr class="apple-hr">
+<section id="OFFERS" class="section-padding">
+    <h1 class="section-title">SPECIAL OFFERS</h1>
+    <div class="offers-card glass-card">
+        <p class="offers-p">✨ New collection drops soon. Stay tuned! ✨</p>
+    </div>
+</section>
+
+<hr class="apple-hr">
+
+<section id="LOCATION" class="section-padding">
+    <h1 class="section-title">VISIT OUR ATELIER</h1>
+    <div class="map-container">
+        <iframe src="https://maps.google.com/maps?q=Nasr%20City,%20Cairo&t=&z=13&ie=UTF8&iwloc=&output=embed" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+</section>
+
+<hr class="apple-hr">
+<h1 class="section-title">CONNECT WITH US</h1>
+<div class="social-1nfo">
+    <div class="social-links">
+        <a href="https://api.whatsapp.com/send?phone=201007100185" target="_blank"><img class="l-1" src="images/image-removebg-preview (2).png" width="70px" alt="WhatsApp"></a>
+        <a href="#" target="_blank"><img class="l-2" src="images/image-removebg-preview (1).png" width="50px" alt="Instagram"></a>
+        <a href="#" target="_blank"><img class="l-3" src="images/image-removebg-preview.png" width="50px" alt="Facebook"></a>
+    </div>
+</div>
+
+<section id="REVIEWS" class="section-padding">
+    <h1 class="section-title">WHAT OUR BRIDES SAY</h1>
+    <div class="reviews-wrapper">
+        <div class="reviews-slider">
+            <div class="review-card">
+                <div class="stars">⭐⭐⭐⭐ Stars</div>
+                <p class="review-text">"بجد الفستان كان خرافة في الفرح ومظبوط بالملي، الستان والتقفيل premium جداً.. تسلم إيدكم بجد رفعتوا راسي!"</p>
+                <h4 class="client-name">- ميرنا أحمد</h4>
+            </div>
+
+            <div class="review-card">
+                <div class="stars">⭐⭐⭐⭐⭐ Stars</div>
+                <p class="review-text">"أجمل أتيليه وأحسن معاملة في مصر. ذوق جداً في التعامل ومواعيد التسليم مظبوطة بالدقيقة. شكراً ديما وجوجو ❤️"</p>
+                <h4 class="client-name">- سارة محمد</h4>
+            </div>
+
+            <div class="review-card">
+                <div class="stars">⭐⭐⭐⭐⭐ Stars</div>
+                <p class="review-text">"كنت خايفة جداً من مقاسات السواريه بس طلع تحفة ومريح جداً في الحركة، والتصميم خطف عيون كل الناس في القاعة."</p>
+                <h4 class="client-name">- ندى ياسر</h4>
+            </div>
+        </div>
+    </div>
+</section>
+
+<a class="floating-whats" href="https://api.whatsapp.com/send?phone=201007100185" target="_blank">
+    <img src="images/sm_5b321c99945a2-removebg-preview.png" alt="WhatsApp">
+</a>
+
+<div id="image-modal" class="image-modal">
+    <span class="close-modal">×</span>
+    <img class="modal-content" id="full-image" alt="Full view">
+</div>
+
+<button id="backToTop" class="back-to-top" aria-label="Scroll to top">
+    <span class="arrow-icon">↑</span>
+</button>
+
+<div class="simple-footer-bottom">
+    <p>جميع الحقوق محفوظة © 2026 | اتيلية ديما و جوجو </p>
+    <p class="developer-credit">Designed & Developed with 💖 by <span>Adham Wael</span></p>
+</div>
+<footer style="padding: 20px; text-align: center; background: #000;">
+    <a href="dashboard.html" style="color: #ffffff; text-decoration: none; font-size: 10px;">إدارة الأتيليه</a>
+</footer>
+
+<script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+<script src="main.js"></script>
+</body>
+</html>

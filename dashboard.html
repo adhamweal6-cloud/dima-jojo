@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لوحة تحكم ديما وجوجو الملكية السحابية 👑</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            background-color: #060608;
+            color: #ffffff;
+            margin: 0;
+            padding: 20px;
+        }
+        
+        /* تصميم شاشة تسجيل الدخول */
+        #login-screen {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-color: #060608;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+        .login-box {
+            background-color: #0d0d12;
+            border: 1px solid #ff758c;
+            padding: 40px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 0 20px rgba(255, 117, 140, 0.2);
+            width: 300px;
+        }
+        .login-box h2 { color: #ff758c; margin-bottom: 20px; }
+        .login-box input {
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #1a1a24;
+            background: #14141a;
+            color: white;
+            width: 80%;
+            margin-bottom: 15px;
+            outline: none;
+            text-align: center;
+        }
+        .login-box button {
+            background: #ff758c;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            width: 85%;
+        }
+        .login-box button:hover { background: #ff4b6b; }
+        #login-error { color: #ff4b4b; font-size: 14px; display: none; margin-top: 10px; }
+
+        /* تصميم الداش بورد */
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #1a1a24;
+        }
+        .header h1 {
+            color: #ff758c;
+            font-size: 32px;
+            margin: 0;
+            text-shadow: 0 0 15px rgba(255, 117, 140, 0.2);
+        }
+        .header p { color: #8a8a9e; margin-top: 5px; }
+        
+        .main-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        @media (max-width: 900px) {
+            .main-container { grid-template-columns: 1fr; }
+        }
+        
+        .column-box {
+            background-color: #0d0d12;
+            border: 1px solid #1a1a24;
+            border-radius: 20px;
+            padding: 20px;
+        }
+        .column-title {
+            font-size: 22px;
+            color: #00f2fe;
+            border-bottom: 2px solid #1a1a24;
+            padding-bottom: 10px;
+            margin-top: 0;
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .card {
+            background: #14141a;
+            border: 1px solid #22222f;
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 15px;
+            position: relative;
+            animation: slideIn 0.4s ease forwards;
+        }
+        @keyframes slideIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        
+        .card h3 { margin: 0 0 10px 0; color: #ffffff; font-size: 18px; }
+        .card p { margin: 5px 0; color: #b0b0c2; font-size: 14px; }
+        .tag {
+            display: inline-block;
+            background: rgba(255, 117, 140, 0.1);
+            color: #ff758c;
+            padding: 3px 8px;
+            border-radius: 6px;
+            font-size: 12px;
+            margin: 3px;
+        }
+        .price-badge {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: #00f2fe20;
+            color: #00f2fe;
+            padding: 5px 10px;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 13px;
+        }
+        .time { font-size: 11px; color: #5c5c6d; display: block; margin-top: 10px; }
+        .loading { text-align: center; color: #ff758c; padding: 20px; }
+
+        .delete-btn {
+            background: rgba(255, 75, 75, 0.1);
+            color: #ff4b4b;
+            border: 1px solid rgba(255, 75, 75, 0.3);
+            padding: 6px 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 12px;
+            transition: 0.2s ease;
+        }
+        .delete-btn:hover {
+            background: #ff4b4b;
+            color: #ffffff;
+        }
+        .card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 15px;
+            border-top: 1px solid #22222f;
+            padding-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="login-screen">
+        <div class="login-box">
+            <h2>اداره الطلبات </h2>
+            <input type="password" id="password-input" placeholder="أدخل كلمة المرور...">
+            <br>
+            <button id="login-button">دخول لوحة التحكم</button>
+            <p id="login-error">كلمة المرور غير صحيحة!</p>
+        </div>
+    </div>
+
+    
+
+    <div id="dashboard-content" style="display: none;">
+        <div class="header">
+            <h1>لوحة تحكم الأتيليه الملكي السحابية 👑</h1>
+            <p>إدارة طلبات المشتريات ومواعيد البروفات بث حي ومباشر</p>
+        </div>
+        <div class="main-container">
+            <div class="column-box">
+                <h2 class="column-title">🛍️ طلبات فساتين السلة <span style="color:#ff758c;" id="orders-count">0</span></h2>
+                <div id="orders-list"><div class="loading">جاري الاتصال بقاعدة البيانات... 🔄</div></div>
+            </div>
+
+            <div class="column-box">
+                <h2 class="column-title" style="color: #00f2fe;">📅 مواعيد البروفات المحجوزة <span style="color:#00f2fe;" id="booking-count">0</span></h2>
+                <div id="booking-list"><div class="loading">جاري الاتصال بقاعدة البيانات... 🔄</div></div>
+            </div>
+        </div>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getFirestore, collection, onSnapshot, query, orderBy, doc, deleteDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+        // --- نظام تسجيل الدخول ---
+        const ADMIN_PASSWORD = "471970"; // تقدر تغير الباسورد من هنا
+        const loginBtn = document.getElementById('login-button');
+        const passInput = document.getElementById('password-input');
+
+        loginBtn.addEventListener('click', () => {
+            if (passInput.value === ADMIN_PASSWORD) {
+                document.getElementById('login-screen').style.display = 'none';
+                document.getElementById('dashboard-content').style.display = 'block';
+            } else {
+                document.getElementById('login-error').style.display = 'block';
+            }
+        });
+
+        // --- إعدادات الفايربيز ---
+        const firebaseConfig = {
+            apiKey: "AIzaSyBI53K10EyBAKGkf4Q1-M1Uwet5JYKKGRg",
+            authDomain: "adham-f9501.firebaseapp.com",
+            projectId: "adham-f9501",
+            storageBucket: "adham-f9501.firebasestorage.app",
+            messagingSenderId: "146782842546",
+            appId: "1:146782842546:web:aa66d8409061bcfaad23ab"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        // --- 1. جلب الطلبات لايف ---
+        const qOrders = query(collection(db, "orders"), orderBy("createdAt", "desc"));
+        onSnapshot(qOrders, (snapshot) => {
+            const list = document.getElementById('orders-list');
+            document.getElementById('orders-count').innerText = snapshot.size;
+            list.innerHTML = '';
+            if(snapshot.empty) { list.innerHTML = '<p class="loading">لا توجد طلبات شراء حتى الآن 🛒</p>'; return; }
+            
+            snapshot.forEach(documentDoc => {
+                const data = documentDoc.data();
+                let timeStr = data.createdAt ? data.createdAt.toDate().toLocaleString('ar-EG') : 'منذ قليل';
+                let itemsHtml = data.items ? data.items.map(i => `<span class="tag">👗 ${i.title}</span>`).join('') : '';
+                
+                list.innerHTML += `
+                    <div class="card">
+                        <span class="price-badge">${data.totalPrice ? data.totalPrice.toLocaleString() : 0} EGP</span>
+                        <h3>👤 ${data.clientName || 'عميل مجهول'}</h3>
+                        <p>📞 هاتف: ${data.clientPhone || 'بدون رقم'}</p>
+                        <div style="margin-top:10px;">${itemsHtml}</div>
+                        
+                        <div class="card-footer">
+                            <span class="time">🕒 ${timeStr}</span>
+                            <button class="delete-btn" data-id="${documentDoc.id}" data-collection="orders">إلغاء الطلب ❌</button>
+                        </div>
+                    </div>
+                `;
+            });
+        });
+
+        // --- 2. جلب المواعيد لايف ---
+        const qBookings = query(collection(db, "appointments"), orderBy("createdAt", "desc"));
+        onSnapshot(qBookings, (snapshot) => {
+            const list = document.getElementById('booking-list');
+            document.getElementById('booking-count').innerText = snapshot.size;
+            list.innerHTML = '';
+            if(snapshot.empty) { list.innerHTML = '<p class="loading">لا توجد مواعيد محجوزة حالياً 📅</p>'; return; }
+            
+            snapshot.forEach(documentDoc => {
+                const data = documentDoc.data();
+                let timeStr = data.createdAt ? data.createdAt.toDate().toLocaleString('ar-EG') : 'منذ قليل';
+                
+                list.innerHTML += `
+                    <div class="card" style="border-color: #00f2fe40;">
+                        <h3>👑 العروسة: ${data.brideName || 'غير مسجل'}</h3>
+                        <p>📞 هاتف: ${data.bridePhone || 'بدون رقم'}</p>
+                        <p style="color:#00f2fe;">📅 الموعد: <strong>${data.bookingDate || ''}</strong> | ⏰ الفترة: <strong>${data.bookingTime || ''}</strong></p>
+                        
+                        <div class="card-footer">
+                            <span class="time">🕒 ${timeStr}</span>
+                            <button class="delete-btn" data-id="${documentDoc.id}" data-collection="appointments">إلغاء الموعد ❌</button>
+                        </div>
+                    </div>
+                `;
+            });
+        });
+
+        // --- 3. تشغيل زرار الحذف (الحل الجذري) ---
+        document.body.addEventListener('click', async (e) => {
+            // لو اليوزر داس على زرار الحذف
+            if (e.target.classList.contains('delete-btn')) {
+                const docId = e.target.getAttribute('data-id');
+                const collectionName = e.target.getAttribute('data-collection');
+                
+                // رسالة تأكيد قبل الحذف
+                if(confirm("هل أنت متأكد من رغبتك في الحذف نهائياً؟")) {
+                    try {
+                        await deleteDoc(doc(db, collectionName, docId));
+                    } catch (error) {
+                        console.error("فشل الحذف: ", error);
+                        alert("حدث خطأ أثناء الحذف!");
+                    }
+                }
+            }
+        });
+
+
+
+import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-storage.js";
+import { addDoc } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js";
+
+const storage = getStorage(app);
+
+// دالة رفع الفستان
+document.getElementById('upload-dress-btn').addEventListener('click', async () => {
+    const title = document.getElementById('dress-title').value;
+    const price = document.getElementById('dress-price').value;
+    const imageFile = document.getElementById('dress-image').files[0];
+    const status = document.getElementById('upload-status');
+
+    if(!title || !price || !imageFile) {
+        alert("من فضلك املئي كل البيانات واختاري صورة!");
+        return;
+    }
+
+    status.innerText = "جاري رفع الصورة... انتظر ثانية ⏳";
+
+    try {
+        // 1. رفع الصورة للمخزن (Storage)
+        const storageRef = ref(storage, 'dresses/' + imageFile.name);
+        await uploadBytes(storageRef, imageFile);
+        const imageUrl = await getDownloadURL(storageRef);
+
+        // 2. حفظ البيانات في قاعدة البيانات (Firestore)
+        await addDoc(collection(db, "dresses"), {
+            title: title,
+            price: parseInt(price),
+            image: imageUrl,
+            createdAt: new Date()
+        });
+
+        status.innerText = "✅ تم رفع الفستان بنجاح وظهوره في الموقع!";
+        document.getElementById('dress-title').value = '';
+        document.getElementById('dress-price').value = '';
+    } catch (error) {
+        console.error(error);
+        status.innerText = "❌ حدث خطأ أثناء الرفع!";
+    }
+});
+
+        // 🔑 تم وضع مفتاح الـ API المجاني الخاص بك بنجاح
+const IMGBB_API_KEY = "e7efa8393124cb9692dee680c5f910ef";
+    </script>
+</body>
+</html>
