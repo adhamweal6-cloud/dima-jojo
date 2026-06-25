@@ -710,3 +710,24 @@ num.onkeyup = function(){
     localStorage.setItem('num',num.value)
 }
 
+
+
+let bt = document.getElementById('backToTop')
+
+window.onscroll = function(){
+    if(scrollY >= 400){
+        bt.style.display = ('block')
+    }
+    else{
+        bt.style.display = ('none')
+    }
+}
+
+bt.onclick = function(){
+  scroll({
+    left:0,
+    top:0,
+    behavior:"smooth"
+  })
+}
+
